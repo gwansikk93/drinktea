@@ -13,7 +13,6 @@ const ABI = ['event DrankTea(address indexed user, uint256 timestamp)']
 export default function Home() {
   const [address, setAddress] = useState('')
   const [date, setDate] = useState('')
-  const [weekday, setWeekday] = useState('')
   const [hasDrunkToday, setHasDrunkToday] = useState(false)
   const [dauCount, setDauCount] = useState(0)
 
@@ -73,11 +72,7 @@ export default function Home() {
       month: 'long',
       year: 'numeric',
     }
-    const weekdayOptions: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-    }
     setDate(today.toLocaleDateString('en-US', dateOptions))
-    setWeekday(today.toLocaleDateString('en-US', weekdayOptions))
   }, [])
 
   useEffect(() => {
@@ -125,36 +120,36 @@ export default function Home() {
         </p>
 
         {address ? (
-  <DrinkHistory contractAddress={CONTRACT_ADDRESS} address={address} />
-) : (
-  <p className="mt-6 text-sm text-gray-400">Connect wallet to see your history</p>
-)}
+          <DrinkHistory contractAddress={CONTRACT_ADDRESS} address={address} />
+        ) : (
+          <p className="mt-6 text-sm text-gray-400">Connect wallet to see your history</p>
+        )}
+
         <RecentDrinkers contractAddress={CONTRACT_ADDRESS} />
+
         <div className="mt-8 text-center text-xs text-gray-400">
-  Built by{' '}
-  <a
-    href="https://github.com/gwansikk93"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="underline"
-  >
-    gwansikk93
-  </a>{' '}
-  / tea username: <span className="font-mono">0x7777tea</span>
-  <br />
-  Contract:{' '}
-  <a
-    href="https://sepolia.tea.xyz/address/0xACCA7867D8a00B9C6D7fcF36E5AFf1278Dd0788a"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="underline"
-  >
-    0xACCA7867D8a00B9C6D7fcF36E5AFf1278Dd0788a
-  </a>
-</div>
-
+          Built by{' '}
+          <a
+            href="https://github.com/gwansikk93"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            gwansikk93
+          </a>{' '}
+          / tea username: <span className="font-mono">0x7777tea</span>
+          <br />
+          Contract:{' '}
+          <a
+            href="https://sepolia.tea.xyz/address/0xACCA7867D8a00B9C6D7fcF36E5AFf1278Dd0788a"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            0xACCA7867D8a00B9C6D7fcF36E5AFf1278Dd0788a
+          </a>
+        </div>
       </div>
-
     </div>
   )
 }
