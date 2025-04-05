@@ -17,8 +17,8 @@ export default function Home() {
   const [dauCount, setDauCount] = useState(0)
 
   async function connectWallet() {
-    if (typeof window !== 'undefined' && (window as any).ethereum) {
-      const provider = new ethers.BrowserProvider((window as any).ethereum)
+    if (typeof window !== 'undefined' && (window as unknown as { ethereum?: any }).ethereum) {
+      const provider = new ethers.BrowserProvider((window as unknown as { ethereum?: any }).ethereum)
       const signer = await provider.getSigner()
       const addr = await signer.getAddress()
       setAddress(addr)
