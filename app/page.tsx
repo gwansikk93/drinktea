@@ -17,8 +17,13 @@ export default function Home() {
   const [dauCount, setDauCount] = useState(0)
 
   async function connectWallet() {
-    if (typeof window !== 'undefined' && (window as Window & { ethereum?: ethers.Eip1193Provider }).ethereum) {
-      const provider = new ethers.BrowserProvider((window as Window & { ethereum?: ethers.Eip1193Provider }).ethereum)
+    if (
+      typeof window !== 'undefined' &&
+      (window as Window & { ethereum?: ethers.Eip1193Provider }).ethereum
+    ) {
+      const provider = new ethers.BrowserProvider(
+        (window as Window & { ethereum?: ethers.Eip1193Provider }).ethereum!
+      )
       const signer = await provider.getSigner()
       const addr = await signer.getAddress()
       setAddress(addr)
@@ -56,7 +61,7 @@ export default function Home() {
     const todayTimestamp = Math.floor(today.getTime() / 1000)
 
     const drank = logs.some(log => {
-      if (!log.args?.user || !log.args?.timestamp) return false;
+      if (!log.args?.user || !log.args?.timestamp) return false
       const user = log.args.user.toLowerCase()
       const ts = Number(log.args.timestamp)
       return user === addr.toLowerCase() && ts >= todayTimestamp
